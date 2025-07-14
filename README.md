@@ -1,0 +1,1 @@
+# Latitude Anonymizer Challenge
