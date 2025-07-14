@@ -1,6 +1,6 @@
 name: CD – Build & Push Docker Image
 on:
-  pull_request:
+  push:
     branches:
       - main
 jobs:
