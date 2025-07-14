@@ -11,6 +11,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Set date tag
+        id: set-date
+        run: |
+          echo "DATE=$(date '+%Y%m%d')" >> $GITHUB_OUTPUT
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -23,4 +28,4 @@ jobs:
           context: .
           push: true          
           tags: |
-            divyaulaganathan/divya-anonymizer:latest
+             ${{ secrets.DOCKERHUB_USERNAME }}/divya-anonymizer:${{ steps.set-date.outputs.DATE }}
