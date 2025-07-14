@@ -23,4 +23,4 @@ jobs:
           context: .
           push: true          
           tags: |
-            divyau94/divya-anonymizer:latest
+            divyaulaganathan/divya-anonymizer:latest
