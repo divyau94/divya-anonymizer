@@ -1,9 +1,8 @@
 name: CD – Build & Push Docker Image
 on:
-  pull:
+  pull_request:
     branches:
       - main
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
