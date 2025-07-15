@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -12,11 +11,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Set date tag
+        id: set-date
+        run: |
+          echo "DATE=$(date '+%Y%m%d')" >> $GITHUB_OUTPUT
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_TOKEN_LATEST }}
 
       - name: Build & Push
         uses: docker/build-push-action@v4
@@ -24,4 +28,4 @@ jobs:
           context: .
           push: true          
           tags: |
-            divyau94/divya-anonymizer:latest
+             ${{ secrets.DOCKERHUB_USERNAME }}/divya-anonymizer:${{ steps.set-date.outputs.DATE }}
