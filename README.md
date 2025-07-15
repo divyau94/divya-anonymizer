@@ -1,6 +1,6 @@
 # Latitude Anonymizer Challenge
 
-Generate realistic customer data, then anonymize the sensitive columns .
+Generate realistic customer data, then anonymize the sensitive columns.
 
 ## Contents
 
@@ -10,7 +10,8 @@ Generate realistic customer data, then anonymize the sensitive columns .
 4. [Project layout](#project-layout)  
 5. [Local setup](#local-setup)  
 6. [CLI usage](#cli-usage)  
-7. [Running tests](#running-tests)  
+7. [Running tests](#running-tests)
+8. [Run from Docker Hub image](#run-from-docker-hub-image)  
 
 
 ---
@@ -46,7 +47,7 @@ Generate realistic customer data, then anonymize the sensitive columns .
 `generator.py` produces a CSV file filled with realistic, synthetic customer data.  It accepts two main flags:
 
 * **`--out`** – path for the output CSV (default: `customers.csv`)  
-* **`--rows`** – number of fake records to create (default: 1000)  
+* **`--rows`** – number of fake records to create (default: 100)  
 
 Internally it uses the **Faker** library to create a first name, last name, street-style address, and an ISO-formatted date of birth for each row, then writes everything to  `csv`.
 
@@ -85,7 +86,7 @@ The script  hashes the `first_name`, `last_name`, and `address` fields using SHA
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate         # Windows: .venv\Scripts\activate
+source .venv/bin/activate         # for Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -93,16 +94,38 @@ pip install -r requirements.txt
 
 ### Generate a CSV
 ```bash
-python -m src.generator --out customers.csv --rows 10
+python -m src.generator --out customers.csv --rows 100
 ```
 
 ### Anonymize a CSV
 ```bash
-python -m src.anonymizer --in customers.csv --out anonymized.csv --salt "sdfsghlskj"
+export ANON_SALT="mysupersecret" #can be any key
+python -m src.anonymizer --in customers.csv --out anonymized.csv
 ```
 
-### Anonymize a CSV
+### Test 
 ```bash
 python -m pytest -v
 ```
+
+## Run from remote Docker Hub Image
+replace <DOCKERHUB_USERNAME> with actual Docker Hub username.
+
+### Pull docker 
+```bash
+docker pull <DOCKERHUB_USERNAME>/divya-anonymizer:20250714
+```
+### Generate customer data 
+```bash
+docker run --rm -v "$(pwd -W)":/data <DOCKERHUB_USERNAME>/divya-anonymizer:20250714 generate --out /data/customer.csv --rows 100 
+```
+### Anonymize customer data 
+```bash
+ docker run --rm -e ANON_SALT=mysupersecret -v "$(pwd -W)":/data <DOCKERHUB_USERNAME>/divya-anonymizer:20250714 anonymize --in /data/customer.csv --out /data/anon_data.csv
+```
+
+
+
+
+
 ---
