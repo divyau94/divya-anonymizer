@@ -10,7 +10,7 @@ Generate realistic customer data, then anonymize the sensitive columns.
 4. [Repository layout](#repository-layout)  
 5. [Local setup](#local-setup)  
 6. [CLI usage](#cli-usage)
-7. [Run from Docker Hub image](#run-from-docker-hub-image)  
+7. [Run from remote Docker Hub image](#run-from-remote-docker-hub-image)  
 
 
 ---
