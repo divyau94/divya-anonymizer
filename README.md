@@ -7,11 +7,10 @@ Generate realistic customer data, then anonymize the sensitive columns.
 1. [Architecture diagram](#architecture-diagram)  
 2. [Features](#features)
 3. [Design details](#design-details)  
-4. [Project layout](#project-layout)  
+4. [Repository layout](#repository-layout)  
 5. [Local setup](#local-setup)  
-6. [CLI usage](#cli-usage)  
-7. [Running tests](#running-tests)
-8. [Run from Docker Hub image](#run-from-docker-hub-image)  
+6. [CLI usage](#cli-usage)
+7. [Run from Docker Hub image](#run-from-docker-hub-image)  
 
 
 ---
@@ -89,7 +88,7 @@ python -m venv .venv
 source .venv/bin/activate         # for Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
-
+---
 ## CLI usage
 
 ### Generate a CSV
@@ -107,7 +106,7 @@ python -m src.anonymizer --in customers.csv --out anonymized.csv
 ```bash
 python -m pytest -v
 ```
-
+---
 ## Run from remote Docker Hub Image
 replace <DOCKERHUB_USERNAME> with actual Docker Hub username.
 
